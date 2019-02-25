@@ -130,7 +130,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReceiveEMDMenuActionPerformed
 
     private void BtnSynchWalletsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSynchWalletsActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        
+        new SynchWalletsMenu(this).setVisible(true);
     }//GEN-LAST:event_BtnSynchWalletsActionPerformed
 
     private void BtnTransferFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTransferFundsActionPerformed
@@ -140,7 +142,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnTransferFundsActionPerformed
 
     private void BtnReceiveFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReceiveFundsActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        
+        new ReceiveFundsMenu(this).setVisible(true);
     }//GEN-LAST:event_BtnReceiveFundsActionPerformed
 
     private void BtnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnQuitActionPerformed
