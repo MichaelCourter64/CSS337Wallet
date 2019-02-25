@@ -9,11 +9,8 @@ public class Balance {
 	private static final String FILE_NAME = "Balance.txt";
 	
 	public Balance() {
-		File file = new File(FILE_NAME);
-		
-		if(exist)
-
 		set(0);
+		updateFile();
 	}
 	
 	public Balance(int newBalance) {
@@ -32,43 +29,48 @@ public class Balance {
 		return Balance;
 	}
 	
+	public static int getBalance() {
+		return (int) Balance;
+	}
+	
 	public static void add(int input) {
 		Balance+= input;
+		updateFile();
 	}
 	
 	public static void remove(int input) {
 		Balance-= input;
+		updateFile();
 	}
 	
-	public static void addB(Long input) {
+	public static void add(Long input) {
 		Balance+= input;
+		updateFile();
 	}
 	
 	public static void remove(Long input) {
 		Balance-= input;
+		updateFile();
 	}
 	
 	public String toString() {
 		return String.valueOf(get());
 	}
 	
-	private void updateFile() throws IOException {
-		File file = new File(FILE_NAME);
-		
-		if(!file.exists()) {
-			file.createNewFile();
+	private static void updateFile() {
+		try {
+			File Data = new File(FILE_NAME);
+			BufferedWriter writeFile = new BufferedWriter(new FileWriter(Data, true));
+			
+			
+				Data.createNewFile();
+				writeFile.write(getBalance());
+				writeFile.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-//		if (file.isFile() && file.canRead()) {
-//			PrintWriter pw = new PrintWriter(FILE_NAME);
-//			pw.close();
-//			FileWriter fw = new FileWriter(file.getAbsoluteFile());
-//		    BufferedWriter bw = new BufferedWriter(fw);
-//		    bw.write(this.toString());
-//		    bw.close();
-//			
-//		}else {
-//			
-//		}
 		
 	}
 	
