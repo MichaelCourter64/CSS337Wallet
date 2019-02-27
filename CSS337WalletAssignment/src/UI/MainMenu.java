@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package css337walletassignment;
+package UI;
+
+import css337walletassignment.Balance;
 
 /**
  *

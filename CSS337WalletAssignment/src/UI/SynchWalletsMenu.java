@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package css337walletassignment;
+package UI;
 
 import javax.swing.JFrame;
 
@@ -11,13 +11,13 @@ import javax.swing.JFrame;
  *
  * @author Michael
  */
-public class TransferFundsMenu extends javax.swing.JFrame {
+public class SynchWalletsMenu extends javax.swing.JFrame {
     private JFrame previousMenu;
     
     /**
-     * Creates new form TransferFundsMenu
+     * Creates new form SynchWalletsMenu
      */
-    public TransferFundsMenu(JFrame previousMenu) {
+    public SynchWalletsMenu(JFrame previousMenu) {
         this.previousMenu = previousMenu;
         
         initComponents();
@@ -33,11 +33,8 @@ public class TransferFundsMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         BtnReturnToPreviousMenu = new javax.swing.JButton();
-        TxtFldOtherWalletId = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        TxtFldAmountToTransfer = new javax.swing.JTextField();
-        BtnTransferFunds = new javax.swing.JButton();
+        TxtFldOtherID = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,16 +45,13 @@ public class TransferFundsMenu extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Receiver's wallet ID:");
+        TxtFldOtherID.setText("Other Wallet ID...");
 
-        jLabel2.setText("Amount to transfer:");
-
-        BtnTransferFunds.setText("Transfer Funds");
-        BtnTransferFunds.setToolTipText("");
-        BtnTransferFunds.setActionCommand("");
-        BtnTransferFunds.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Generate Nuimber");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnTransferFundsActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -69,32 +63,23 @@ public class TransferFundsMenu extends javax.swing.JFrame {
                 .addComponent(BtnReturnToPreviousMenu)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel2)
-                    .addComponent(TxtFldOtherWalletId)
-                    .addComponent(TxtFldAmountToTransfer)
-                    .addComponent(BtnTransferFunds, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton1))
+                    .addComponent(TxtFldOtherID, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BtnReturnToPreviousMenu)
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtFldOtherWalletId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(TxtFldOtherID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtFldAmountToTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BtnTransferFunds)
-                .addGap(0, 61, Short.MAX_VALUE))
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 43, Short.MAX_VALUE))
         );
 
         pack();
@@ -106,16 +91,13 @@ public class TransferFundsMenu extends javax.swing.JFrame {
         previousMenu.setVisible(true);
     }//GEN-LAST:event_BtnReturnToPreviousMenuActionPerformed
 
-    private void BtnTransferFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTransferFundsActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnTransferFundsActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnReturnToPreviousMenu;
-    private javax.swing.JButton BtnTransferFunds;
-    private javax.swing.JTextField TxtFldAmountToTransfer;
-    private javax.swing.JTextField TxtFldOtherWalletId;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField TxtFldOtherID;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

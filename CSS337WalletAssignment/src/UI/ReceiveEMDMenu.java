@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package css337walletassignment;
+package UI;
 
+import Cryptography.AES256Encrypter;
+import css337walletassignment.User;
 import java.math.BigInteger;
 import javax.swing.*;
 

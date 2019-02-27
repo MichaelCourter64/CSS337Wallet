@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package css337walletassignment;
+package UI;
 
 import javax.swing.JFrame;
 
@@ -11,13 +11,13 @@ import javax.swing.JFrame;
  *
  * @author Michael
  */
-public class SynchWalletsMenu extends javax.swing.JFrame {
+public class ReceiveFundsMenu extends javax.swing.JFrame {
     private JFrame previousMenu;
     
     /**
-     * Creates new form SynchWalletsMenu
+     * Creates new form ReceiveFundsMenu
      */
-    public SynchWalletsMenu(JFrame previousMenu) {
+    public ReceiveFundsMenu(JFrame previousMenu) {
         this.previousMenu = previousMenu;
         
         initComponents();
@@ -33,7 +33,8 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         BtnReturnToPreviousMenu = new javax.swing.JButton();
-        TxtFldOtherID = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        TxtFldTransactionToken = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -45,10 +46,9 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
             }
         });
 
-        TxtFldOtherID.setText("Other Wallet ID...");
+        jLabel1.setText("Transaction Token:");
 
-        jButton1.setText("Generate Nuimber");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        jButton1.setText("Process Transaction");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -61,28 +61,29 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BtnReturnToPreviousMenu)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 326, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(TxtFldTransactionToken, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1))
-                    .addComponent(TxtFldOtherID, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addGap(54, 54, 54)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(BtnReturnToPreviousMenu)
                 .addGap(18, 18, 18)
-                .addComponent(TxtFldOtherID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
+                .addComponent(TxtFldTransactionToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addGap(0, 26, Short.MAX_VALUE))
         );
-
-        jButton1.getAccessibleContext().setAccessibleName("Generate Nuimber");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -99,7 +100,8 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnReturnToPreviousMenu;
-    private javax.swing.JTextField TxtFldOtherID;
+    private javax.swing.JTextField TxtFldTransactionToken;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

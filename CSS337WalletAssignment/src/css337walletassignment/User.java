@@ -5,6 +5,8 @@
  */
 package css337walletassignment;
 
+import Cryptography.SHA256Hasher;
+
 /**
  *
  * @author Michael

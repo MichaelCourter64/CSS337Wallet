@@ -1,4 +1,4 @@
-package css337walletassignment;
+package Cryptography;
 
 import java.security.MessageDigest;
 
