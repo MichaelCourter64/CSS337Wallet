@@ -1,3 +1,5 @@
+package css337walletassignment;
+        
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -17,7 +19,7 @@ public class AES256Encrypter {
 		keySpec = new SecretKeySpec(keyArray, "AES");
 		Cipher cipher;
 		try {
-			cipher = Cipher.getInstance("AES/ECB/NoPadding");
+			cipher = Cipher.getInstance("AES/CBC/NoPadding");
 			cipher.init(Cipher.ENCRYPT_MODE, keySpec);
 		
 			output = cipher.doFinal(input);
@@ -50,7 +52,7 @@ public class AES256Encrypter {
 	        
 	        //SecretKey tmpGen = kGen.generateKey();
 	        //SecretKeySpec secretKeyGen = new SecretKeySpec(tmpGen.getEncoded(), "AES");
-	         
+	        ///CBC originally
 	        Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
 	        cipher.init(Cipher.DECRYPT_MODE, secretKeyGen, ivspec);
 	        return cipher.doFinal(input);

@@ -5,7 +5,8 @@
  */
 package css337walletassignment;
 
-import javax.swing.JFrame;
+import java.math.BigInteger;
+import javax.swing.*;
 
 /**
  *
@@ -85,7 +86,20 @@ public class ReceiveEMDMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnConfirmDepositActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmDepositActionPerformed
-        // TODO add your handling code here:
+        String encryptedEMD = TxtFldEncryptedEMD.getText();
+        
+        byte[] decryptedAmount; 
+        
+        decryptedAmount = AES256Encrypter.decrypt(encryptedEMD, User.PERSONAL_WALLET_KEY);
+        
+        BigInteger result = new BigInteger(decryptedAmount);
+        
+        try {
+            User.PERSONAL_BALANCE.add(result.intValueExact());
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "The input EMD isn't a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_BtnConfirmDepositActionPerformed
 
     private void BtnReturnToPreviousMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReturnToPreviousMenuActionPerformed

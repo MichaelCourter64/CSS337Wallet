@@ -178,6 +178,8 @@ public class MainMenu extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        Balance balance = new Balance();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

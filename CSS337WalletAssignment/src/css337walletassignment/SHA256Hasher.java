@@ -1,3 +1,5 @@
+package css337walletassignment;
+
 import java.security.MessageDigest;
 
 public class SHA256Hasher {
