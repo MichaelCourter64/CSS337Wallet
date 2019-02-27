@@ -95,9 +95,11 @@ public class ReceiveEMDMenu extends javax.swing.JFrame {
         BigInteger result = new BigInteger(decryptedAmount);
         
         try {
+            System.out.println(result.intValueExact());
             User.PERSONAL_BALANCE.add(result.intValueExact());
         }
         catch(Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "The input EMD isn't a valid amount", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_BtnConfirmDepositActionPerformed

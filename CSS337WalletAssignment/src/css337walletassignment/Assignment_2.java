@@ -39,8 +39,8 @@ public class Assignment_2 {
 		
 		String Student_ID = "56789859";
                 String amount = "00000000000000000000000000000123";
-		String KWallet = SHA256Hasher.sha256(Student_ID);
-		System.out.println("KWallet = " + KWallet);
+		//String KWallet = SHA256Hasher.sha256(Student_ID);
+		//System.out.println("KWallet = " + KWallet);
 		
                 //byte[] cipherText = AES256Encrypter.encrypt(amount, KWallet);
                 //System.out.println("EMD = " + StringConversions.bytesToHex(cipherText));
