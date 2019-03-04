@@ -6,6 +6,7 @@
 package UI;
 
 import javax.swing.JFrame;
+import css337walletassignment.MoneyTransfer;
 
 /**
  *
@@ -34,7 +35,7 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
 
         BtnReturnToPreviousMenu = new javax.swing.JButton();
         TxtFldOtherID = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BtnGenerateNumber = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -46,11 +47,11 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Generate Nuimber");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnGenerateNumber.setText("Generate Nuimber");
+        BtnGenerateNumber.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
+        BtnGenerateNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnGenerateNumberActionPerformed(evt);
             }
         });
 
@@ -70,7 +71,7 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(jButton1))
+                        .addComponent(BtnGenerateNumber))
                     .addComponent(TxtFldOtherID, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -83,7 +84,7 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(TxtFldOtherID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnGenerateNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
 
@@ -96,14 +97,14 @@ public class SynchWalletsMenu extends javax.swing.JFrame {
         previousMenu.setVisible(true);
     }//GEN-LAST:event_BtnReturnToPreviousMenuActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BtnGenerateNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenerateNumberActionPerformed
+        MoneyTransfer.sync(TxtFldOtherID.getText());
+    }//GEN-LAST:event_BtnGenerateNumberActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnGenerateNumber;
     private javax.swing.JButton BtnReturnToPreviousMenu;
     private javax.swing.JTextField TxtFldOtherID;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

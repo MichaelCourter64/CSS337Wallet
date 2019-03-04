@@ -9,7 +9,7 @@ import org.json.*;
 
 public class Balance {
 	
-    private static long currentBalance = -1;
+    private static int currentBalance = -1;
     private static final String FILE_NAME = "Balance.json";
 
     public static void initializeBalance() {
@@ -43,14 +43,10 @@ public class Balance {
     }
     
     public static void set(int input) {
-        currentBalance = Long.valueOf(input);
-    }
-
-    public static void set(Long input) {
         currentBalance = input;
     }
 
-    public static Long get() {
+    public static int get() {
         return currentBalance;
     }
 

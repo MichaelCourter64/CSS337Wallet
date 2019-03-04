@@ -42,6 +42,8 @@ public class ReceiveEMDMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        TxtFldEncryptedEMD.setFocusCycleRoot(true);
+
         BtnConfirmDeposit.setText("Confirm Deposit");
         BtnConfirmDeposit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +107,10 @@ public class ReceiveEMDMenu extends javax.swing.JFrame {
         try {
             System.out.println(result.intValueExact());
             User.PERSONAL_BALANCE.add(result.intValueExact());
+            
+            JOptionPane.showMessageDialog(this, "$" + result +" was added to your account.");
+            
+            BtnReturnToPreviousMenu.doClick();
         }
         catch(Exception e) {
             e.printStackTrace();

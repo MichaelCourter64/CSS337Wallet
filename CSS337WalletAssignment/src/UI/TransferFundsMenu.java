@@ -6,6 +6,8 @@
 package UI;
 
 import javax.swing.JFrame;
+import css337walletassignment.MoneyTransfer;
+import css337walletassignment.Balance;
 
 /**
  *
@@ -109,7 +111,10 @@ public class TransferFundsMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReturnToPreviousMenuActionPerformed
 
     private void BtnTransferFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTransferFundsActionPerformed
-        // TODO add your handling code here:
+        int amount = Integer.parseInt(TxtFldAmountToTransfer.getText());
+        
+        MoneyTransfer.send(TxtFldOtherWalletId.getText(), amount);
+        Balance.remove(amount);
     }//GEN-LAST:event_BtnTransferFundsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

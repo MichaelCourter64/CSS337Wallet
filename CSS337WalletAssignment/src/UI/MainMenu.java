@@ -7,6 +7,8 @@ package UI;
 
 import css337walletassignment.Balance;
 import css337walletassignment.WalletInteractionMap;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 /**
  *
@@ -21,6 +23,17 @@ public class MainMenu extends javax.swing.JFrame {
         initComponents();
         
         LblBalance.setText(Integer.toString(Balance.getBalance()));
+        
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                LblBalance.setText(Integer.toString(Balance.getBalance()));
+            }
+        });
+    }
+    
+    public void updateBalance() {
+        LblBalance.setText(String.valueOf(Balance.get()));
     }
 
     /**

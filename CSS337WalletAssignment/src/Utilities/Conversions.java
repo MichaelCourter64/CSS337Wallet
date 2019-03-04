@@ -1,8 +1,9 @@
 package Utilities;
 
 import java.math.BigInteger;
+import java.nio.ByteBuffer;
 
-public class StringConversions {
+public class Conversions {
     public static byte[] hexStringToByteArray(String inputStr) {
             byte[] val = new byte[inputStr.length() / 2];
         for (int i = 0; i < val.length; i++) {
@@ -26,15 +27,11 @@ public class StringConversions {
         return new String(hexChars);
     }
 
-    public static byte[] hexStringToByte(String hexstr) 
-    {
-        byte[] retVal = new BigInteger(hexstr, 16).toByteArray();
-        if (retVal[0] == 0) 
-        {
-            byte[] newArray = new byte[retVal.length - 1];
-            System.arraycopy(retVal, 1, newArray, 0, newArray.length);
-            return newArray;
-        }
-        return retVal;
+    public static byte[] intToByteArray(int integer) {
+        return ByteBuffer.allocate(4).putInt(integer).array();
+    }
+    
+    public static String hexStringToIntString(String hexToConvert) {
+        return String.valueOf(Integer.parseInt(hexToConvert, 16));
     }
 }

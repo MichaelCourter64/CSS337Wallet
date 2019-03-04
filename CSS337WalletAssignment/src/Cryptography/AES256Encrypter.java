@@ -1,6 +1,6 @@
 package Cryptography;
         
-import Utilities.StringConversions;
+import Utilities.Conversions;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -16,8 +16,8 @@ public class AES256Encrypter {
     private static String salt = "ssshhhhhhhhhhh!!!!";
     
     public static byte[] encrypt(String stringToEncrypt, String key) {
-        byte[] input = StringConversions.hexStringToByteArray(stringToEncrypt);
-        byte[] keyArray = StringConversions.hexStringToByteArray(key);
+        byte[] input = Conversions.hexStringToByteArray(stringToEncrypt);
+        byte[] keyArray = Conversions.hexStringToByteArray(key);
         byte[] output = null;
         SecretKeySpec keySpec = null;
         keySpec = new SecretKeySpec(keyArray, "AES");
@@ -46,8 +46,8 @@ public class AES256Encrypter {
             byte[] iv = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
             IvParameterSpec ivspec = new IvParameterSpec(iv);
 
-            byte[] input = StringConversions.hexStringToByteArray(hexToDecrypt);
-            byte[] key = StringConversions.hexStringToByteArray(hexKey);
+            byte[] input = Conversions.hexStringToByteArray(hexToDecrypt);
+            byte[] key = Conversions.hexStringToByteArray(hexKey);
 
             SecretKeySpec secretKeyGen = new SecretKeySpec(key, "AES");
             

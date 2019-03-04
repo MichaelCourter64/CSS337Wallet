@@ -6,6 +6,7 @@
 package UI;
 
 import javax.swing.JFrame;
+import css337walletassignment.MoneyTransfer;
 
 /**
  *
@@ -35,7 +36,7 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
         BtnReturnToPreviousMenu = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         TxtFldTransactionToken = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BtnProcessTransaction = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,10 +50,10 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Transaction Token:");
 
-        jButton1.setText("Process Transaction");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnProcessTransaction.setText("Process Transaction");
+        BtnProcessTransaction.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnProcessTransactionActionPerformed(evt);
             }
         });
 
@@ -70,7 +71,7 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
                     .addComponent(TxtFldTransactionToken, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(jButton1)))
+                        .addComponent(BtnProcessTransaction)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -82,7 +83,7 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TxtFldTransactionToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(BtnProcessTransaction)
                 .addGap(0, 18, Short.MAX_VALUE))
         );
 
@@ -95,14 +96,14 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
         previousMenu.setVisible(true);
     }//GEN-LAST:event_BtnReturnToPreviousMenuActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void BtnProcessTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnProcessTransactionActionPerformed
+        MoneyTransfer.recieve(TxtFldTransactionToken.getText());
+    }//GEN-LAST:event_BtnProcessTransactionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnProcessTransaction;
     private javax.swing.JButton BtnReturnToPreviousMenu;
     private javax.swing.JTextField TxtFldTransactionToken;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

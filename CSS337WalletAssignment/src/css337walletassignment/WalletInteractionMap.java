@@ -15,7 +15,7 @@ import org.json.JSONObject;
 public class WalletInteractionMap {
     static final String FILE_NAME = "WalletIdMap.json";
     
-    static HashMap<String, Long> walletMap = new HashMap<String, Long>();
+    static HashMap<String, Integer> walletMap = new HashMap<String, Integer>();
 
     public static void initializeMap() {
         try {
@@ -31,11 +31,11 @@ public class WalletInteractionMap {
                 
                 while (idItrator.hasNext()) {
                     String id = idItrator.next();
-                    walletMap.put(id, jsonMap.getLong(id));
+                    walletMap.put(id, jsonMap.getInt(id));
                 }
             }
             else {
-                walletMap = new HashMap<String, Long>();
+                walletMap = new HashMap<String, Integer>();
                 
                 updateFile();
             }
@@ -50,31 +50,28 @@ public class WalletInteractionMap {
             walletMap.put(name, walletMap.get(name) + 1);
         }
         else {
-            walletMap.put(name, (long)0);
+            walletMap.put(name, 0);
         }
 
-        JSONObject obj = new JSONObject();
-
-        obj.put("WalletMap", walletMap);
-
-        try (FileWriter file = new FileWriter("WalletSyncTable.json")) {
-            file.write(obj.toString());
-            file.flush();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+        updateFile();
 
         return true;
     }
 
-    public static long getCounter(String name){
-        Iterator itr = walletMap.keySet().iterator();
+    public static int getCounter(String name){
+        /*Iterator itr = walletMap.keySet().iterator();
         while(itr.hasNext()) {
             String key = (String) itr.next();
             if(key == name)
                 return walletMap.get(key);
+        }*/
+        
+        if (walletMap.containsKey(name)) {
+            return walletMap.get(name);
         }
-        return -1;
+        else {
+            return -1;
+        }
     }
 
     private static void updateFile() {
