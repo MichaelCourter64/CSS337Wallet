@@ -48,8 +48,10 @@ public class TransferFundsMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Receiver's wallet ID:");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Amount to transfer:");
 
         BtnTransferFunds.setText("Transfer Funds");
@@ -77,8 +79,8 @@ public class TransferFundsMenu extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(TxtFldOtherWalletId)
                     .addComponent(TxtFldAmountToTransfer)
-                    .addComponent(BtnTransferFunds, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(BtnTransferFunds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,7 +96,7 @@ public class TransferFundsMenu extends javax.swing.JFrame {
                 .addComponent(TxtFldAmountToTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnTransferFunds)
-                .addGap(0, 61, Short.MAX_VALUE))
+                .addGap(0, 45, Short.MAX_VALUE))
         );
 
         pack();

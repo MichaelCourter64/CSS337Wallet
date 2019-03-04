@@ -6,6 +6,7 @@
 package UI;
 
 import css337walletassignment.Balance;
+import css337walletassignment.WalletInteractionMap;
 
 /**
  *
@@ -19,7 +20,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         
-        // Update MainMenu balance number.
+        LblBalance.setText(Integer.toString(Balance.getBalance()));
     }
 
     /**
@@ -38,7 +39,7 @@ public class MainMenu extends javax.swing.JFrame {
         BtnTransferFunds = new javax.swing.JButton();
         BtnReceiveFunds = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        LblBalance = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,10 +86,10 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1.add(BtnReceiveFunds);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Balance:");
+        jLabel1.setText("Balance: $");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("ERROR");
+        LblBalance.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        LblBalance.setText("ERROR");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,25 +100,25 @@ public class MainMenu extends javax.swing.JFrame {
                 .addComponent(BtnQuit)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(145, 145, 145)
+                .addGap(136, 136, 136)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(LblBalance))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                    .addComponent(LblBalance))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(BtnQuit)
                 .addContainerGap())
         );
@@ -180,7 +181,8 @@ public class MainMenu extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        Balance balance = new Balance();
+        Balance.initializeBalance();
+        WalletInteractionMap.initializeMap();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -196,8 +198,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton BtnReceiveFunds;
     private javax.swing.JButton BtnSynchWallets;
     private javax.swing.JButton BtnTransferFunds;
+    private javax.swing.JLabel LblBalance;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
