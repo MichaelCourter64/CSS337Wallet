@@ -25,6 +25,8 @@ public class MoneyTransfer {
 
     public static void transferFunds(String Other_WALLET_ID, int value) {
         send(Other_WALLET_ID, value, WalletInteractionMap.getCounter(Other_WALLET_ID));
+        
+        WalletInteractionMap.updateEntry(Other_WALLET_ID);
     }
     
     private static void send(String Other_WALLET_ID, int value, int counter){
@@ -40,7 +42,7 @@ public class MoneyTransfer {
             return;
         }
         
-        if (value <= 0) {
+        if (value < 0) {
             JOptionPane.showMessageDialog(null, "That isn't a valid amount to send.", "Amount to send error", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -60,8 +62,6 @@ public class MoneyTransfer {
         byte[] cipher = AES256Encrypter.encrypt(token, Bank_ID);
         //show as dialaog box
         JOptionPane.showMessageDialog(null, Conversions.bytesToHex(cipher),"Transaction Value", JOptionPane.INFORMATION_MESSAGE);
-        
-        WalletInteractionMap.updateEntry(Other_WALLET_ID);
     }
 
     public static void recieve(String cipher){
@@ -70,10 +70,23 @@ public class MoneyTransfer {
         //split
         String message = Conversions.bytesToHex(plain);
         String sendersWalletId = Conversions.hexStringToIntString(message.substring(8, 16));
+        int sentCounter = Integer.parseInt(Conversions.hexStringToIntString(message.substring(24)));
         
         // If the receiver's ID doesn't match this application's ID, then:
         if (sendersWalletId.compareTo(User.PERSONAL_WALLET_ID) != 0) {
             JOptionPane.showMessageDialog(null, "This transfer isn't meant for you.", "Receiver's wallet ID error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // If the count value is 0, then:
+        if (sentCounter == 0) {
+            if (WalletInteractionMap.getCounter(sendersWalletId) != -1) {
+                WalletInteractionMap.updateEntry(sendersWalletId);
+
+                send(User.PERSONAL_WALLET_ID, 0, 0);   
+            }            
+            
+            WalletInteractionMap.updateEntry(sendersWalletId);
             return;
         }
         
