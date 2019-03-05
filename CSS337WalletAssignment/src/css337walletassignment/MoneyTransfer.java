@@ -69,11 +69,11 @@ public class MoneyTransfer {
         byte[] plain = AES256Encrypter.decrypt(cipher, Bank_ID);
         //split
         String message = Conversions.bytesToHex(plain);
-        String sendersWalletId = Conversions.hexStringToIntString(message.substring(8, 16));
+        String sendersWalletId = Conversions.hexStringToIntString(message.substring(0, 8));
         int sentCounter = Integer.parseInt(Conversions.hexStringToIntString(message.substring(24)));
         
         // If the receiver's ID doesn't match this application's ID, then:
-        if (sendersWalletId.compareTo(User.PERSONAL_WALLET_ID) != 0) {
+        if (Conversions.hexStringToIntString(message.substring(16, 24)).compareTo(User.PERSONAL_WALLET_ID) != 0) {
             JOptionPane.showMessageDialog(null, "This transfer isn't meant for you.", "Receiver's wallet ID error", JOptionPane.ERROR_MESSAGE);
             return;
         }
