@@ -53,7 +53,7 @@ public class MoneyTransfer {
         otherIdHex = frontPadHexStringTo4Bytes(otherIdHex);
         String valueHex = Integer.toHexString(value);
         valueHex = frontPadHexStringTo4Bytes(valueHex);
-        String counterHex = Integer.toHexString(WalletInteractionMap.getCounter(Other_WALLET_ID));
+        String counterHex = String.valueOf(counter);
         counterHex = frontPadHexStringTo4Bytes(counterHex);
         
         String token = personalIdHex + otherIdHex + valueHex + counterHex;
@@ -73,17 +73,17 @@ public class MoneyTransfer {
         int sentCounter = Integer.parseInt(Conversions.hexStringToIntString(message.substring(24)));
         
         // If the receiver's ID doesn't match this application's ID, then:
-        if (Conversions.hexStringToIntString(message.substring(16, 24)).compareTo(User.PERSONAL_WALLET_ID) != 0) {
+        if (Conversions.hexStringToIntString(message.substring(8, 16)).compareTo(User.PERSONAL_WALLET_ID) != 0) {
             JOptionPane.showMessageDialog(null, "This transfer isn't meant for you.", "Receiver's wallet ID error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
         // If the count value is 0, then:
         if (sentCounter == 0) {
-            if (WalletInteractionMap.getCounter(sendersWalletId) != -1) {
+            if (WalletInteractionMap.getCounter(sendersWalletId) == -1) {
                 WalletInteractionMap.updateEntry(sendersWalletId);
 
-                send(User.PERSONAL_WALLET_ID, 0, 0);   
+                send(sendersWalletId, 0, 0);   
             }            
             
             WalletInteractionMap.updateEntry(sendersWalletId);
