@@ -15,15 +15,22 @@ public class MoneyTransfer {
     public static void sync(String ID){
         if(WalletInteractionMap.getCounter(ID) == -1){
             WalletInteractionMap.updateEntry(ID);
-        }else{
+            
+            send(ID, 0, 0);
+        }
+        else{
             JOptionPane.showMessageDialog(null, "You're already synced with this wallet.","Sync Error", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
-    public static void send(String Other_WALLET_ID, int value){
+    public static void transferFunds(String Other_WALLET_ID, int value) {
+        send(Other_WALLET_ID, value, WalletInteractionMap.getCounter(Other_WALLET_ID));
+    }
+    
+    private static void send(String Other_WALLET_ID, int value, int counter){
         //String token ="00000" + User.PERSONAL_WALLET_ID + "00000" + Other_WALLET_ID + Normalize(value) + Normalize(WalletInteractionMap.getCounter(Other_WALLET_ID));
         
-        if (WalletInteractionMap.getCounter(Other_WALLET_ID) == -1) {
+        if (counter == -1) {
             JOptionPane.showMessageDialog(null, "You haven't synced your wallet with their's yet.", "Receiver's wallet ID error", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -62,7 +69,7 @@ public class MoneyTransfer {
         byte[] plain = AES256Encrypter.decrypt(cipher, Bank_ID);
         //split
         String message = Conversions.bytesToHex(plain);
-        String sendersWalletId = Conversions.hexStringToIntString(message.substring(7, 16));
+        String sendersWalletId = Conversions.hexStringToIntString(message.substring(8, 16));
         
         // If the receiver's ID doesn't match this application's ID, then:
         if (sendersWalletId.compareTo(User.PERSONAL_WALLET_ID) != 0) {
@@ -71,12 +78,13 @@ public class MoneyTransfer {
         }
         
         if (WalletInteractionMap.getCounter(Conversions.
-                hexStringToIntString(message.substring(0, 8))) == -1) {
+                hexStringToIntString(message.substring(0, 8))) != 
+                Integer.parseInt(Conversions.hexStringToIntString(message.substring(24)))) {
             JOptionPane.showMessageDialog(null, "You haven't synced your wallet with the sender's yet.", "Sync error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        int amount = Integer.parseInt(message.substring(15, 24), 16);
+        int amount = Integer.parseInt(message.substring(16, 24), 16);
         Balance.add(amount);
         WalletInteractionMap.updateEntry(sendersWalletId);
         JOptionPane.showMessageDialog(null,"Recieved " + amount + " from WalletID = " + message.substring(0, 8),"Transaction Value", JOptionPane.INFORMATION_MESSAGE);

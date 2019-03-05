@@ -113,7 +113,7 @@ public class TransferFundsMenu extends javax.swing.JFrame {
     private void BtnTransferFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTransferFundsActionPerformed
         int amount = Integer.parseInt(TxtFldAmountToTransfer.getText());
         
-        MoneyTransfer.send(TxtFldOtherWalletId.getText(), amount);
+        MoneyTransfer.transferFunds(TxtFldOtherWalletId.getText(), amount);
         Balance.remove(amount);
     }//GEN-LAST:event_BtnTransferFundsActionPerformed
 

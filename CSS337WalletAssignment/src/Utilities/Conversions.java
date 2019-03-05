@@ -32,6 +32,7 @@ public class Conversions {
     }
     
     public static String hexStringToIntString(String hexToConvert) {
+        int test = Integer.parseInt(hexToConvert, 16);
         return String.valueOf(Integer.parseInt(hexToConvert, 16));
     }
 }
