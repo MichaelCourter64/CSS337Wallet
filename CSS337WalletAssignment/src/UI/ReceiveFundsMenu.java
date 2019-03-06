@@ -37,6 +37,8 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         TxtFldTransactionToken = new javax.swing.JTextField();
         BtnProcessTransaction = new javax.swing.JButton();
+        TxtFldSynceResponseOutput = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +59,9 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Sync Response Code:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -67,11 +72,14 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(71, 71, 71)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(TxtFldTransactionToken, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(BtnProcessTransaction)))
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addComponent(TxtFldTransactionToken, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(54, 54, 54)
+                            .addComponent(BtnProcessTransaction))
+                        .addComponent(TxtFldSynceResponseOutput)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -84,7 +92,11 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
                 .addComponent(TxtFldTransactionToken, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BtnProcessTransaction)
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(TxtFldSynceResponseOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -97,13 +109,22 @@ public class ReceiveFundsMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnReturnToPreviousMenuActionPerformed
 
     private void BtnProcessTransactionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnProcessTransactionActionPerformed
-        MoneyTransfer.recieve(TxtFldTransactionToken.getText());
+        String possibleReturnCipherText = MoneyTransfer.recieve(TxtFldTransactionToken.getText());
+        
+        if (possibleReturnCipherText.compareTo("") != 0) {
+            TxtFldSynceResponseOutput.setText(possibleReturnCipherText);
+        }
+        else {
+            BtnReturnToPreviousMenu.doClick();
+        }
     }//GEN-LAST:event_BtnProcessTransactionActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnProcessTransaction;
     private javax.swing.JButton BtnReturnToPreviousMenu;
+    private javax.swing.JTextField TxtFldSynceResponseOutput;
     private javax.swing.JTextField TxtFldTransactionToken;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

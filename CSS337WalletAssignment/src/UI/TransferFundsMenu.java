@@ -40,6 +40,7 @@ public class TransferFundsMenu extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         TxtFldAmountToTransfer = new javax.swing.JTextField();
         BtnTransferFunds = new javax.swing.JButton();
+        TxtFldTransferCipherOutput = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,7 +82,8 @@ public class TransferFundsMenu extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(TxtFldOtherWalletId)
                     .addComponent(TxtFldAmountToTransfer)
-                    .addComponent(BtnTransferFunds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(BtnTransferFunds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TxtFldTransferCipherOutput))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -98,7 +100,9 @@ public class TransferFundsMenu extends javax.swing.JFrame {
                 .addComponent(TxtFldAmountToTransfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnTransferFunds)
-                .addGap(0, 45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TxtFldTransferCipherOutput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,8 +117,7 @@ public class TransferFundsMenu extends javax.swing.JFrame {
     private void BtnTransferFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTransferFundsActionPerformed
         int amount = Integer.parseInt(TxtFldAmountToTransfer.getText());
         
-        MoneyTransfer.transferFunds(TxtFldOtherWalletId.getText(), amount);
-        Balance.remove(amount);
+        TxtFldTransferCipherOutput.setText(MoneyTransfer.transferFunds(TxtFldOtherWalletId.getText(), amount));
     }//GEN-LAST:event_BtnTransferFundsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -122,6 +125,7 @@ public class TransferFundsMenu extends javax.swing.JFrame {
     private javax.swing.JButton BtnTransferFunds;
     private javax.swing.JTextField TxtFldAmountToTransfer;
     private javax.swing.JTextField TxtFldOtherWalletId;
+    private javax.swing.JTextField TxtFldTransferCipherOutput;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

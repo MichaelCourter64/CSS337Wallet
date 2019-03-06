@@ -38,6 +38,7 @@
                   <Component id="TxtFldOtherWalletId" max="32767" attributes="0"/>
                   <Component id="TxtFldAmountToTransfer" alignment="0" max="32767" attributes="0"/>
                   <Component id="BtnTransferFunds" alignment="0" max="32767" attributes="0"/>
+                  <Component id="TxtFldTransferCipherOutput" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="43" max="32767" attributes="0"/>
           </Group>
@@ -57,7 +58,9 @@
               <Component id="TxtFldAmountToTransfer" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="BtnTransferFunds" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="45" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="TxtFldTransferCipherOutput" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -100,6 +103,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnTransferFundsActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="TxtFldTransferCipherOutput">
     </Component>
   </SubComponents>
 </Form>

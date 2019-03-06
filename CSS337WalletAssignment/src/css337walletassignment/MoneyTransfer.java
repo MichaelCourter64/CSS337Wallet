@@ -12,39 +12,46 @@ public class MoneyTransfer {
     public MoneyTransfer() {
     }
 
-    public static void sync(String ID){
+    public static String sync(String ID){
         if(WalletInteractionMap.getCounter(ID) == -1){
-            WalletInteractionMap.updateEntry(ID);
+            String cipherText = send(ID, 0, 0);
             
-            send(ID, 0, 0);
+            if (cipherText.compareTo("") != 0) {
+                WalletInteractionMap.updateEntry(ID);
+            }
+            
+            return cipherText;
         }
         else{
             JOptionPane.showMessageDialog(null, "You're already synced with this wallet.","Sync Error", JOptionPane.INFORMATION_MESSAGE);
+            return "";
         }
     }
 
-    public static void transferFunds(String Other_WALLET_ID, int value) {
-        send(Other_WALLET_ID, value, WalletInteractionMap.getCounter(Other_WALLET_ID));
+    public static String transferFunds(String Other_WALLET_ID, int value) {
+        String transactionCipherText = send(Other_WALLET_ID, value, WalletInteractionMap.getCounter(Other_WALLET_ID));
         
-        WalletInteractionMap.updateEntry(Other_WALLET_ID);
+        if (transactionCipherText.compareTo("") != 0) {
+            WalletInteractionMap.updateEntry(Other_WALLET_ID);
+        }
+        
+        return transactionCipherText;
     }
     
-    private static void send(String Other_WALLET_ID, int value, int counter){
-        //String token ="00000" + User.PERSONAL_WALLET_ID + "00000" + Other_WALLET_ID + Normalize(value) + Normalize(WalletInteractionMap.getCounter(Other_WALLET_ID));
-        
+    private static String send(String Other_WALLET_ID, int value, int counter){
         if (counter == -1) {
             JOptionPane.showMessageDialog(null, "You haven't synced your wallet with their's yet.", "Receiver's wallet ID error", JOptionPane.WARNING_MESSAGE);
-            return;
+            return "";
         }
         
         if (value > Balance.getBalance()) {
             JOptionPane.showMessageDialog(null, "You don't have enough money to transfer that amount.", "Amount to send error", JOptionPane.WARNING_MESSAGE);
-            return;
+            return "";
         }
         
         if (value < 0) {
             JOptionPane.showMessageDialog(null, "That isn't a valid amount to send.", "Amount to send error", JOptionPane.WARNING_MESSAGE);
-            return;
+            return "";
         }
         
         String personalIdHex = Integer.toHexString(Integer.parseInt(User.PERSONAL_WALLET_ID));
@@ -60,47 +67,61 @@ public class MoneyTransfer {
         
         //Encrypt
         byte[] cipher = AES256Encrypter.encrypt(token, Bank_ID);
-        //show as dialaog box
-        JOptionPane.showMessageDialog(null, Conversions.bytesToHex(cipher),"Transaction Value", JOptionPane.INFORMATION_MESSAGE);
+        String cipherHex = Conversions.bytesToHex(cipher);
+        Balance.remove(value);
+        return cipherHex;
     }
 
-    public static void recieve(String cipher){
+    public static String recieve(String cipher){
+        byte[] plain;
+        
         //Decrypt
-        byte[] plain = AES256Encrypter.decrypt(cipher, Bank_ID);
-        //split
-        String message = Conversions.bytesToHex(plain);
-        String sendersWalletId = Conversions.hexStringToIntString(message.substring(0, 8));
-        int sentCounter = Integer.parseInt(Conversions.hexStringToIntString(message.substring(24)));
+        try {
+            plain = AES256Encrypter.decrypt(cipher, Bank_ID);
         
-        // If the receiver's ID doesn't match this application's ID, then:
-        if (Conversions.hexStringToIntString(message.substring(8, 16)).compareTo(User.PERSONAL_WALLET_ID) != 0) {
-            JOptionPane.showMessageDialog(null, "This transfer isn't meant for you.", "Receiver's wallet ID error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        // If the count value is 0, then:
-        if (sentCounter == 0) {
-            if (WalletInteractionMap.getCounter(sendersWalletId) == -1) {
-                WalletInteractionMap.updateEntry(sendersWalletId);
+            //split
+            String message = Conversions.bytesToHex(plain);
+            String sendersWalletId = Conversions.hexStringToIntString(message.substring(0, 8));
+            int sentCounter = Integer.parseInt(Conversions.hexStringToIntString(message.substring(24)));
 
-                send(sendersWalletId, 0, 0);   
-            }            
-            
+            // If the receiver's ID doesn't match this application's ID, then:
+            if (Conversions.hexStringToIntString(message.substring(8, 16)).compareTo(User.PERSONAL_WALLET_ID) != 0) {
+                JOptionPane.showMessageDialog(null, "This transfer isn't meant for you.", "Receiver's wallet ID error", JOptionPane.ERROR_MESSAGE);
+                return "";
+            }
+
+            // If the count value is 0, then:
+            if (sentCounter == 0) {
+                String output = "";
+
+                if (WalletInteractionMap.getCounter(sendersWalletId) == -1) {
+                    WalletInteractionMap.updateEntry(sendersWalletId);
+
+                    output = send(sendersWalletId, 0, 0);   
+                }            
+
+                WalletInteractionMap.updateEntry(sendersWalletId);
+                return output;
+            }
+
+            if (WalletInteractionMap.getCounter(Conversions.
+                    hexStringToIntString(message.substring(0, 8))) != 
+                    Integer.parseInt(Conversions.hexStringToIntString(message.substring(24)))) {
+                JOptionPane.showMessageDialog(null, "You haven't synced your wallet with the sender's yet.", "Sync error", JOptionPane.ERROR_MESSAGE);
+                return "";
+            }
+
+            int amount = Integer.parseInt(message.substring(16, 24), 16);
+            Balance.add(amount);
             WalletInteractionMap.updateEntry(sendersWalletId);
-            return;
+            JOptionPane.showMessageDialog(null,"Recieved $" + amount + " from WalletID = " + Conversions.hexStringToIntString(message.substring(0, 8)),"Transaction Value", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "The Transaction Token isn't valid.", "Invalid TransactionToken", JOptionPane.ERROR_MESSAGE);
+            return "";
         }
         
-        if (WalletInteractionMap.getCounter(Conversions.
-                hexStringToIntString(message.substring(0, 8))) != 
-                Integer.parseInt(Conversions.hexStringToIntString(message.substring(24)))) {
-            JOptionPane.showMessageDialog(null, "You haven't synced your wallet with the sender's yet.", "Sync error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        int amount = Integer.parseInt(message.substring(16, 24), 16);
-        Balance.add(amount);
-        WalletInteractionMap.updateEntry(sendersWalletId);
-        JOptionPane.showMessageDialog(null,"Recieved " + amount + " from WalletID = " + message.substring(0, 8),"Transaction Value", JOptionPane.INFORMATION_MESSAGE);
+        return "";
     }
 
     private static String Normalize(long value) {
